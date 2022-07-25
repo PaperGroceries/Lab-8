@@ -156,5 +156,18 @@ int main(int argc, const char * argv[]) {
     cout << movie2.getAverage()<< endl; // 3.8
     
     //std::cout << "Hello, World!\n";
+} while (selection != 4);
+
+     delete arr[0];
+
+     delete arr[1];
+
+     delete arr[2];
+
+     delete arr[3];
+
+     delete arr;
+     return 223;
+ }
     return 0;
 }
