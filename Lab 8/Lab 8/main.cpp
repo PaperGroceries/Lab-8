@@ -15,7 +15,7 @@ class Movie
 {
     string movie_name;
     string MPAA_rating;
-    int arr_rating[5];
+    int *arr_rating;
     int terrible_rating;
     int bad_rating;
     int ok_rating;
@@ -34,31 +34,44 @@ public:
     {
         movie_name = "Empty";
         MPAA_rating = "Empty";
-//        terrible_rating = 0;
-//        bad_rating = 0;
-//        ok_rating = 0;
-//        good_rating = 0;
-//        great_rating = 0;
+
+        arr_rating = new int[5];
         for(int i = 0; i < 5; i++)
         {
             arr_rating[i]=0;
         }
     };
+    
+    Movie(Movie &y){
+          // deep copy
+          this->arr_rating = new int[5];
+          for(int i = 0; i < 5; i++){
+              this->arr_rating[i] = y.arr_rating[i];
+          }
+      }
+    
+    void operator=(Movie x){ // x(movie2)
+           // deep copy
+           for(int i = 0; i < 5; i++){
+               this->arr_rating[i] = x.arr_rating[i];
+           }
+       }
     Movie (string new_name,string new_rating)
     {
         movie_name = new_name;
         MPAA_rating = new_rating;
-//        terrible_rating = 0;
-//        bad_rating = 0;
-//        ok_rating = 0;
-//        good_rating = 0;
-//        great_rating = 0;
+
+        arr_rating = new int[5];
         for(int i = 0; i < 5; i++)
         {
             arr_rating[i]=0;
         }
 
     };
+    ~Movie()
+    {
+        delete []arr_rating;
+    }
     
 };
 string Movie :: getName()
@@ -80,28 +93,7 @@ void Movie::setName(string newName)
 }
 int Movie::addRating(int rating)
 {
-
-    //recieve number that corresposnds to rating and add a tick to the something_rating
-//    if (rating == 1)
-//    {
-//        terrible_rating++;
-//    }
-//    else if (rating == 2)
-//    {
-//        bad_rating++;
-//    }
-//    else if(rating == 3)
-//    {
-//        ok_rating++;
-//    }
-//    else if( rating == 4)
-//    {
-//        good_rating++;
-//    }
-//    else if( rating == 5)
-//    {
-//        great_rating++;
-//    }
+ 
     for (int i = 0;i < 5;i++)
     {
         if (i == (rating - 1))
@@ -132,8 +124,55 @@ double Movie::getAverage()
 
 int main(int argc, const char * argv[]) {
     // insert code here...
+    Movie arr[4];
+    Movie **arra;
+    arra = new Movie*[4];
+    arra[0] = new Movie("Rio", "E");
+    arra[1] = new Movie("Fight Club", "E");
+    arra[2] = new Movie("Minions", "E");
+    arra[3] = new Movie("Machete", "E");
     
-    Movie movie1("Fight Club", "R");
+    for (int i =0 ; i < 4;i++)
+    {
+        arra[i]->addRating(1);
+        arra[i]->addRating(1);         // Terrible
+        arra[i]->addRating(3);         // OK
+        arra[i]->addRating(3);         // OK
+        arra[i]->addRating(5);
+        
+    }
+    
+    for (int k = 0; k <4; k++)
+    {
+       cout << arra[k]->getName() << endl;
+       cout << arra[k]->getMPAA() << endl;
+       cout << arra[k]->getAverage() << endl;
+    }
+//    arr[0] = Movie("Rio", "E");
+//    arr[1] = Movie("Fight Club","R");
+//    arr[0] = Movie("Minions", "PG-13");
+//    arr[1] = Movie("Machete","E");
+//    for (int i =0 ; i < 4;i++)
+//    {
+//        arr[i].addRating(1);
+//        arr[i].addRating(1);         // Terrible
+//        arr[i].addRating(3);         // OK
+//        arr[i].addRating(3);         // OK
+//        arr[i].addRating(5);
+//
+//    }
+//    for (int k = 0; k <4; k++)
+//    {
+//       cout << arr[k].getName() << endl;
+//       cout << arr[k].getMPAA() << endl;
+//       cout << arr[k].getAverage() << endl;
+//    }
+    
+    cout << arra[0]->getName() << endl;
+//    cout << arra[k].getMPAA() << endl;
+//    cout << arra[k].getAverage() << endl;
+    
+    Movie movie1("Time-loop", "R");
     movie1.addRating(5);         // Great
     movie1.addRating(1);         // Terrible
     movie1.addRating(3);         // OK
@@ -155,19 +194,23 @@ int main(int argc, const char * argv[]) {
     cout << movie2.getMPAA()<< endl;            //"PG-13"
     cout << movie2.getAverage()<< endl; // 3.8
     
+//    delete [0]arra;
+//    delete [1]arra;
+//    delete [2]arra;
+//    delete [3]arra;
     //std::cout << "Hello, World!\n";
-} while (selection != 4);
-
-     delete arr[0];
-
-     delete arr[1];
-
-     delete arr[2];
-
-     delete arr[3];
-
-     delete arr;
-     return 223;
- }
-    return 0;
+//} while (selection != 4);
+//
+//     delete arr[0];
+//
+//     delete arr[1];
+//
+//     delete arr[2];
+//
+//     delete arr[3];
+//
+//     delete arr;
+//     return 223;
+// }
+//    return 0;
 }
