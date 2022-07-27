@@ -194,10 +194,11 @@ int main(int argc, const char * argv[]) {
     cout << movie2.getMPAA()<< endl;            //"PG-13"
     cout << movie2.getAverage()<< endl; // 3.8
     
-//    delete [0]arra;
-//    delete [1]arra;
-//    delete [2]arra;
-//    delete [3]arra;
+    delete arra[0];
+    delete arra[1];
+    delete arra[2];
+    delete arra[3];
+    delete []arra;
     //std::cout << "Hello, World!\n";
 //} while (selection != 4);
 //
